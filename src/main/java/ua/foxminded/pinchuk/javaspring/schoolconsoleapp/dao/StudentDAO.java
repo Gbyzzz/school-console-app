@@ -4,7 +4,6 @@ import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.beans.Student;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.exception.DAOException;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface StudentDAO {
     boolean addStudent(Student student);

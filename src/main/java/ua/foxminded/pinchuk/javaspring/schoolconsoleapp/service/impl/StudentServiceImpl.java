@@ -7,7 +7,6 @@ import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.impl.StudentDAOImpl;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.service.StudentService;
 
 import java.util.List;
-import java.util.Optional;
 
 public class StudentServiceImpl implements StudentService {
 
@@ -15,9 +14,9 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public int addStudent(Student student) {
-       if(studentDAO.addStudent(student))
-           return 0;
-       else return 1;
+        if (studentDAO.addStudent(student))
+            return 0;
+        else return 1;
     }
 
     @Override

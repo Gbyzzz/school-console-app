@@ -17,7 +17,7 @@ public class CommandProvider {
         repository.put(6, new RemoveStudentFromCourse());
     }
 
-    public Command getCommand(int select){
+    public Command getCommand(int select) {
         return repository.get(select);
     }
 }

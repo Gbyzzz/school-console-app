@@ -10,7 +10,7 @@ public class Student {
     private Group group;
     private List<Course> courses;
 
-    public Student(){
+    public Student() {
 
     }
 
@@ -85,34 +85,40 @@ public class Student {
     public String toString() {
         return id + ". " + firstName + " " + lastName + ", group: " + group.getName() + "(#" + group.getId() + ")";
     }
-    public static class Builder{
+
+    public static class Builder {
         private Student newStudent;
-        public Builder(){
+
+        public Builder() {
             newStudent = new Student();
         }
-        public Student.Builder setId(int id){
+
+        public Student.Builder setId(int id) {
             newStudent.setId(id);
             return this;
         }
-        public Student.Builder setFirstName(String firstName){
+
+        public Student.Builder setFirstName(String firstName) {
             newStudent.setFirstName(firstName);
             return this;
         }
-        public Student.Builder setLastName(String lastName){
+
+        public Student.Builder setLastName(String lastName) {
             newStudent.setLastName(lastName);
             return this;
         }
-        public Student.Builder setGroup(Group group){
+
+        public Student.Builder setGroup(Group group) {
             newStudent.setGroup(group);
             return this;
         }
 
-        public Student.Builder setCourses(List<Course> courses){
+        public Student.Builder setCourses(List<Course> courses) {
             newStudent.setCourses(courses);
             return this;
         }
 
-        public Student build(){
+        public Student build() {
             return newStudent;
         }
     }

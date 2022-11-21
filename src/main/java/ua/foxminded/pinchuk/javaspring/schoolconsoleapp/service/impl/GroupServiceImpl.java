@@ -17,13 +17,14 @@ public class GroupServiceImpl implements GroupService {
     }
 
     private GroupDAO groupDAO = new GroupDAOImpl();
+
     @Override
     public Group findGroupById(int id) throws ServiceException {
         Optional<Group> optionalGroup = groupDAO.getGroupById(id);
         Group group;
         try {
             group = optionalGroup.get();
-        } catch (RuntimeException e){
+        } catch (RuntimeException e) {
             throw new ServiceException(e + "No such element in the DB");
         }
         return group;

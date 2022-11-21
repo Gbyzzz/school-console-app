@@ -36,17 +36,7 @@ public class RemoveStudentFromCourse implements Command {
             io.outputLine("Input the index of the course you want to delete");
             int courseId = io.getInt();
             studentService.removeStudentToCourse(studentId, courseId);
-//        if (courses.size() > 0 ) {
-//            io.outputLine("Removing student from course:");
-//            io.outputLine("Please select course from the list below:");
-//            io.outputList(courses);
-//            io.outputLine("Input the index of the course");
-//            int courseId = io.getInt();
-//            List<Student> students = courses.get(courseId).getStudents();
-//            io.outputLine("Students: " + students.toString());
-//            io.outputLine("Please select index of the student from the list above");
-//            int studentId = io.getInt();
-//            courseService.removeStudentFromCourse(courseId, studentId);
+
         } else {
             io.outputLine("No students or courses were found");
             io.outputLine("");

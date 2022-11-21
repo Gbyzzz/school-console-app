@@ -1,16 +1,19 @@
 package ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.exception;
 
 public class DAOException extends Exception {
-    public DAOException(){
+    public DAOException() {
         super();
     }
-    public DAOException(String message){
+
+    public DAOException(String message) {
         super(message);
     }
-    public DAOException(Exception e){
+
+    public DAOException(Exception e) {
         super(e);
     }
-    public DAOException(String message, Exception e){
+
+    public DAOException(String message, Exception e) {
         super(message, e);
     }
 }

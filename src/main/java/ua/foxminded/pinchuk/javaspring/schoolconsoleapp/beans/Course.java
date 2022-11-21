@@ -9,7 +9,8 @@ public class Course {
     private String description;
     private List<Student> students;
 
-    public Course(){}
+    public Course() {
+    }
 
     public Course(int id, String name, String description, List<Student> students) {
         this.id = id;
@@ -67,30 +68,35 @@ public class Course {
     public String toString() {
         return id + ". " + name + ": " + description;
     }
-    public static class Builder{
+
+    public static class Builder {
         private Course newCourse;
-        public Builder(){
+
+        public Builder() {
             newCourse = new Course();
         }
 
-        public Course.Builder setId(int id){
+        public Course.Builder setId(int id) {
             newCourse.setId(id);
             return this;
         }
-        public Course.Builder setName(String name){
+
+        public Course.Builder setName(String name) {
             newCourse.setName(name);
             return this;
         }
-        public Course.Builder setDescription(String description){
+
+        public Course.Builder setDescription(String description) {
             newCourse.setDescription(description);
             return this;
         }
-        public Course.Builder setStudents(List<Student> students){
+
+        public Course.Builder setStudents(List<Student> students) {
             newCourse.setStudents(students);
             return this;
         }
 
-        public Course build(){
+        public Course build() {
             return newCourse;
         }
 

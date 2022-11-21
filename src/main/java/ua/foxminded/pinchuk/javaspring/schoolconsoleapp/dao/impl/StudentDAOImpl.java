@@ -11,7 +11,6 @@ import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.utils.DAOUtilsImpl;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class StudentDAOImpl implements StudentDAO {
     private DAOUtils utils = new DAOUtilsImpl();
@@ -44,6 +43,8 @@ public class StudentDAOImpl implements StudentDAO {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -58,6 +59,8 @@ public class StudentDAOImpl implements StudentDAO {
             }
         } catch (SQLException e) {
             throw new DAOException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
         return students;
     }
@@ -65,12 +68,14 @@ public class StudentDAOImpl implements StudentDAO {
     @Override
     public void addStudentToCourse(int studentId, int courseId) {
         try (Connection connection = DBConnection.getConnection();
-        PreparedStatement statement = connection.prepareStatement(SQL_ADD_STUDENT_TO_COURSE)){
+             PreparedStatement statement = connection.prepareStatement(SQL_ADD_STUDENT_TO_COURSE)) {
             statement.setInt(1, studentId);
             statement.setInt(2, courseId);
             statement.execute();
 
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
 
@@ -79,11 +84,13 @@ public class StudentDAOImpl implements StudentDAO {
     @Override
     public void deleteStudentById(int studentId) {
         try (Connection connection = DBConnection.getConnection();
-        PreparedStatement statement = connection.prepareStatement(SQL_REMOVE_STUDENT_BY_ID)){
+             PreparedStatement statement = connection.prepareStatement(SQL_REMOVE_STUDENT_BY_ID)) {
             statement.setLong(1, studentId);
             statement.execute();
 
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -100,18 +107,22 @@ public class StudentDAOImpl implements StudentDAO {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
         return students;
     }
 
     @Override
     public void removeStudentToCourse(int studentId, int courseId) {
-        try(Connection connection = DBConnection.getConnection();
-        PreparedStatement statement = connection.prepareStatement(SQL_REMOVE_STUDENT_FROM_COURSE)){
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_REMOVE_STUDENT_FROM_COURSE)) {
             statement.setInt(1, studentId);
             statement.setInt(2, courseId);
             statement.execute();
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }

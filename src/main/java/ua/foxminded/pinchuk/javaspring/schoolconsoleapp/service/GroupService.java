@@ -8,6 +8,8 @@ import java.util.Map;
 
 public interface GroupService {
     List<Group> findAllGroups();
+
     Group findGroupById(int id) throws ServiceException;
+
     Map<Group, Integer> findGroupsByNumberOfStudents(int students);
 }

@@ -10,23 +10,28 @@ import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.service.impl.StudentServ
 public class ServiceFactory {
     private static final ServiceFactory SERVICE = new ServiceFactory();
     private static final DAOInit INIT = new DAOInitImpl();
+
     public static void initDB() throws DAOException {
         INIT.initDatabase();
     }
-    public static ServiceFactory getService(){
+
+    public static ServiceFactory getService() {
         return SERVICE;
     }
+
     private CourseService courseService = new CourseServiceImpl();
     private GroupService groupService = new GroupServiceImpl();
     private StudentService studentService = new StudentServiceImpl();
 
-    public CourseService getCourseService(){
+    public CourseService getCourseService() {
         return courseService;
     }
-    public GroupService getGroupService(){
+
+    public GroupService getGroupService() {
         return groupService;
     }
-    public StudentService getStudentService(){
+
+    public StudentService getStudentService() {
         return studentService;
     }
 }

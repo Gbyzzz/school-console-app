@@ -6,7 +6,8 @@ public class Group {
     private int id;
     private String name;
 
-    public Group(){}
+    public Group() {
+    }
 
     public Group(int id, String name) {
         this.id = id;
@@ -46,22 +47,25 @@ public class Group {
     public String toString() {
         return id + ". " + name;
     }
-    public static class Builder{
+
+    public static class Builder {
         Group newGroup;
 
-        public Builder(){
+        public Builder() {
             newGroup = new Group();
         }
 
-        public Group.Builder setId(int id){
+        public Group.Builder setId(int id) {
             newGroup.setId(id);
             return this;
         }
-        public Group.Builder setName(String name){
+
+        public Group.Builder setName(String name) {
             newGroup.setName(name);
             return this;
         }
-        public Group build(){
+
+        public Group build() {
             return newGroup;
         }
     }

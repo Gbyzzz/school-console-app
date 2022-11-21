@@ -1,17 +1,16 @@
 package ua.foxminded.pinchuk.javaspring.schoolconsoleapp.view.impl;
 
-import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.beans.Course;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.beans.Group;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.view.IOData;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class IODataImpl implements IOData {
 
     private static final Scanner IN = new Scanner(System.in);
+
     @Override
     public void outputLine(String arg) {
         System.out.println(arg);
@@ -19,14 +18,14 @@ public class IODataImpl implements IOData {
 
     @Override
     public void outputList(List<? extends Object> list) {
-        for(Object obj : list){
+        for (Object obj : list) {
             outputLine(obj.toString());
         }
     }
 
     @Override
     public void outputMap(Map<Group, Integer> map) {
-        for(Group group : map.keySet()){
+        for (Group group : map.keySet()) {
             outputLine(group.toString() + " - " + map.get(group) + " students");
         }
     }
@@ -45,9 +44,9 @@ public class IODataImpl implements IOData {
     @Override
     public int getIntFromRange(int start, int end) {
         int res = 0;
-        while (IN.hasNextInt()){
+        while (IN.hasNextInt()) {
             res = Integer.parseInt(IN.nextLine());
-            if(res <= end && res >= start){
+            if (res <= end && res >= start) {
                 break;
             } else {
                 IN.next();
@@ -60,7 +59,7 @@ public class IODataImpl implements IOData {
     @Override
     public int getInt() {
         int res = 0;
-        if (IN.hasNextInt()){
+        if (IN.hasNextInt()) {
             res = Integer.parseInt(IN.nextLine());
         }
         return res;

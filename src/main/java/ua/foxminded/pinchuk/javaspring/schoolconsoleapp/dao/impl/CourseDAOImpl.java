@@ -1,7 +1,6 @@
 package ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.impl;
 
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.beans.Course;
-import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.controller.command.Command;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.CourseDAO;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.DAOUtils;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.DBConnection;
@@ -30,6 +29,8 @@ public class CourseDAOImpl implements CourseDAO {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
         return courses;
     }
@@ -38,15 +39,17 @@ public class CourseDAOImpl implements CourseDAO {
     @Override
     public List<Course> getCoursesByStudentId(int studentId) {
         List<Course> courses = new ArrayList<>();
-        try(Connection connection = DBConnection.getConnection();
-        PreparedStatement statement = connection.prepareStatement(SQL_GET_COURSE_BY_STUDENT)) {
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_GET_COURSE_BY_STUDENT)) {
             statement.setInt(1, studentId);
             ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 courses.add(utils.createCourse(resultSet));
             }
 
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
         return courses;
