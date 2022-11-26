@@ -8,6 +8,7 @@ import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.GroupDAO;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.utils.DAOUtilsImpl;
 
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.*;
 
@@ -31,6 +32,8 @@ public class GroupDAOImpl implements GroupDAO {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -50,6 +53,8 @@ public class GroupDAOImpl implements GroupDAO {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -68,6 +73,8 @@ public class GroupDAOImpl implements GroupDAO {
             }
 
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);

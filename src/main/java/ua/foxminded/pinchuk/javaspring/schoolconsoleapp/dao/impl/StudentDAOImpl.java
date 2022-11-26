@@ -8,6 +8,7 @@ import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.StudentDAO;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.exception.DAOException;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.utils.DAOUtilsImpl;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ public class StudentDAOImpl implements StudentDAO {
     private static final String SQL_GET_ALL_STUDENTS = "SELECT s.student_id, s.first_name, s.last_name, g.group_id, " +
             "g.group_name FROM students s JOIN groups g ON s.group_id=g.group_id";
     private static final String SQL_REMOVE_STUDENT_BY_ID = "DELETE FROM students WHERE student_id=?";
-    private static final String SQL_ADD_STUDENT = "INSERT INTO students (first_name, last_name, group_id) values(?,?,?) RETURNING student_id";
+    private static final String SQL_ADD_STUDENT = "INSERT INTO students (first_name, last_name, group_id) values (?, ?, ?)";
     private static final String SQL_GET_STUDENTS_BY_COURSE_ID = "SELECT s.student_id, s.first_name, s.last_name, g.group_id," +
             "g.group_name FROM courses_students JOIN students s ON courses_students.student_id=s.student_id JOIN groups g ON " +
             "s.group_id=g.group_id WHERE course_id=?";
@@ -35,13 +36,16 @@ public class StudentDAOImpl implements StudentDAO {
             statement.setString(1, student.getFirstName());
             statement.setString(2, student.getLastName());
             statement.setLong(3, student.getGroup().getId());
-            ResultSet resultSet = statement.executeQuery();
+            statement.executeUpdate();
+            ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
                 return true;
             } else {
                 return false;
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
@@ -59,6 +63,8 @@ public class StudentDAOImpl implements StudentDAO {
             }
         } catch (SQLException e) {
             throw new DAOException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -75,6 +81,8 @@ public class StudentDAOImpl implements StudentDAO {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -89,6 +97,8 @@ public class StudentDAOImpl implements StudentDAO {
             statement.execute();
 
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
@@ -107,6 +117,8 @@ public class StudentDAOImpl implements StudentDAO {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -114,13 +126,15 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    public void removeStudentToCourse(int studentId, int courseId) {
+    public void removeStudentFromCourse(int studentId, int courseId) {
         try (Connection connection = DBConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQL_REMOVE_STUDENT_FROM_COURSE)) {
             statement.setInt(1, studentId);
             statement.setInt(2, courseId);
             statement.execute();
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);

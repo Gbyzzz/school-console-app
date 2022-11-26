@@ -41,6 +41,6 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void removeStudentToCourse(int studentId, int courseId) {
-        studentDAO.removeStudentToCourse(studentId, courseId);
+        studentDAO.removeStudentFromCourse(studentId, courseId);
     }
 }

@@ -19,9 +19,12 @@ public class DAOInitImpl implements DAOInit {
         try (Connection connection = DBConnection.getConnection();
              Statement statement = connection.createStatement()) {
             statement.execute(query);
+            DBConnection.setDatabase("school_db");
 
         } catch (SQLException e) {
             throw new DAOException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

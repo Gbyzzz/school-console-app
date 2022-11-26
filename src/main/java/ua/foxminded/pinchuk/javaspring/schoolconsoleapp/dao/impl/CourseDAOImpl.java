@@ -6,6 +6,7 @@ import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.DAOUtils;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.DBConnection;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.utils.DAOUtilsImpl;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,6 @@ public class CourseDAOImpl implements CourseDAO {
     private DAOUtils utils = new DAOUtilsImpl();
 
     private static final String SQL_GET_ALL_COURSES = "SELECT * FROM courses";
-    private static final String SQL_REMOVE_STUDENT_FROM_COURSE = "DELETE FROM courses_students WHERE course_id = ? AND student_id = ?";
     private static final String SQL_GET_COURSE_BY_STUDENT = "SELECT c.course_id, c.course_name, c.course_description FROM courses_students cs " +
             "JOIN courses c ON cs.course_id=c.course_id WHERE cs.student_id=?";
 
@@ -28,6 +28,8 @@ public class CourseDAOImpl implements CourseDAO {
                 courses.add(utils.createCourse(resultSet));
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
@@ -48,6 +50,8 @@ public class CourseDAOImpl implements CourseDAO {
             }
 
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
