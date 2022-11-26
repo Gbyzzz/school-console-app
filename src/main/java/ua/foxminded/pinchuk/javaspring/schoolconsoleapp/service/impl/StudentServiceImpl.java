@@ -1,16 +1,16 @@
 package ua.foxminded.pinchuk.javaspring.schoolconsoleapp.service.impl;
 
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.beans.Student;
+import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.DAOFactory;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.StudentDAO;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.exception.DAOException;
-import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.impl.StudentDAOImpl;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.service.StudentService;
 
 import java.util.List;
 
 public class StudentServiceImpl implements StudentService {
 
-    private StudentDAO studentDAO = new StudentDAOImpl();
+    private StudentDAO studentDAO = DAOFactory.getInstance().getStudentDAO();
 
     @Override
     public int addStudent(Student student) {

@@ -5,27 +5,22 @@ import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.beans.Student;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.controller.command.Command;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.exception.DAOException;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.service.CourseService;
-import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.service.GroupService;
+import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.service.ServiceFactory;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.service.StudentService;
-import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.service.impl.CourseServiceImpl;
-import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.service.impl.GroupServiceImpl;
-import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.service.impl.StudentServiceImpl;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.view.IOData;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.view.IODataFactory;
 
 import java.util.List;
 
 public class RemoveStudentFromCourse implements Command {
-    private StudentService service = new StudentServiceImpl();
-    private IOData io = IODataFactory.getIoData();
-    private GroupService groupService = new GroupServiceImpl();
-    private StudentService studentService = new StudentServiceImpl();
-    private CourseService courseService = new CourseServiceImpl();
+    private IOData io = IODataFactory.getInstance().getIoData();
+    private StudentService studentService = ServiceFactory.getService().getStudentService();
+    private CourseService courseService = ServiceFactory.getService().getCourseService();
 
     public void execute() throws DAOException {
         List<Course> courses = courseService.findAllCourses();
         List<Student> students = studentService.findAllStudents();
-        if (courses.size() > 0 && students.size() > 0) {
+        if (courses.isEmpty() && students.isEmpty()) {
             io.outputLine("Removing student from course:");
             io.outputLine("Please select student from the list below:");
             io.outputList(students);

@@ -2,11 +2,11 @@ package ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.impl;
 
 
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.beans.Student;
+import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.DAOFactory;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.DAOUtils;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.DBConnection;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.StudentDAO;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.exception.DAOException;
-import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.utils.DAOUtilsImpl;
 
 import java.io.IOException;
 import java.sql.*;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentDAOImpl implements StudentDAO {
-    private DAOUtils utils = new DAOUtilsImpl();
+    private DAOUtils utils = DAOFactory.getInstance().getDaoUtils();
 
     private static final String SQL_GET_ALL_STUDENTS = "SELECT s.student_id, s.first_name, s.last_name, g.group_id, " +
             "g.group_name FROM students s JOIN groups g ON s.group_id=g.group_id";
@@ -30,6 +30,7 @@ public class StudentDAOImpl implements StudentDAO {
 
     @Override
     public boolean addStudent(Student student) {
+        boolean added;
 
         try (Connection connection = DBConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQL_ADD_STUDENT)) {
@@ -39,17 +40,14 @@ public class StudentDAOImpl implements StudentDAO {
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
-                return true;
+                added = true;
             } else {
-                return false;
+                added = false;
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException|ClassNotFoundException|IOException e) {
+            throw new DAOException(e);
         }
+        return added;
     }
 
     @Override
@@ -61,13 +59,10 @@ public class StudentDAOImpl implements StudentDAO {
             while (resultSet.next()) {
                 students.add(utils.createStudent(resultSet));
             }
-        } catch (SQLException e) {
+        } catch (SQLException|ClassNotFoundException|IOException e) {
             throw new DAOException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         }
+
         return students;
     }
 
@@ -79,12 +74,8 @@ public class StudentDAOImpl implements StudentDAO {
             statement.setInt(2, courseId);
             statement.execute();
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException|ClassNotFoundException|IOException e) {
+            throw new DAOException(e);
         }
 
     }
@@ -96,12 +87,8 @@ public class StudentDAOImpl implements StudentDAO {
             statement.setLong(1, studentId);
             statement.execute();
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException|ClassNotFoundException|IOException e) {
+            throw new DAOException(e);
         }
     }
 
@@ -115,12 +102,8 @@ public class StudentDAOImpl implements StudentDAO {
             while (resultSet.next()) {
                 students.add(utils.createStudent(resultSet));
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException|ClassNotFoundException|IOException e) {
+            throw new DAOException(e);
         }
         return students;
     }
@@ -132,12 +115,8 @@ public class StudentDAOImpl implements StudentDAO {
             statement.setInt(1, studentId);
             statement.setInt(2, courseId);
             statement.execute();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException|ClassNotFoundException|IOException e) {
+            throw new DAOException(e);
         }
     }
 }

@@ -2,16 +2,15 @@ package ua.foxminded.pinchuk.javaspring.schoolconsoleapp.service.impl;
 
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.beans.Course;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.CourseDAO;
+import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.DAOFactory;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.StudentDAO;
-import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.impl.CourseDAOImpl;
-import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.impl.StudentDAOImpl;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.service.CourseService;
 
 import java.util.List;
 
 public class CourseServiceImpl implements CourseService {
-    private CourseDAO courseDAO = new CourseDAOImpl();
-    private StudentDAO studentDAO = new StudentDAOImpl();
+    private CourseDAO courseDAO = DAOFactory.getInstance().getCourseDAO();
+    private StudentDAO studentDAO = DAOFactory.getInstance().getStudentDAO();
 
     @Override
     public List<Course> findAllCourses() {

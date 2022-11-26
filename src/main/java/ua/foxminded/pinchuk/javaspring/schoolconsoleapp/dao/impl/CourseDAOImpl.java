@@ -2,9 +2,10 @@ package ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.impl;
 
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.beans.Course;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.CourseDAO;
+import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.DAOFactory;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.DAOUtils;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.DBConnection;
-import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.utils.DAOUtilsImpl;
+import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.exception.DAOException;
 
 import java.io.IOException;
 import java.sql.*;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CourseDAOImpl implements CourseDAO {
-    private DAOUtils utils = new DAOUtilsImpl();
+    private DAOUtils utils = DAOFactory.getInstance().getDaoUtils();
 
     private static final String SQL_GET_ALL_COURSES = "SELECT * FROM courses";
     private static final String SQL_GET_COURSE_BY_STUDENT = "SELECT c.course_id, c.course_name, c.course_description FROM courses_students cs " +
@@ -27,12 +28,8 @@ public class CourseDAOImpl implements CourseDAO {
             while (resultSet.next()) {
                 courses.add(utils.createCourse(resultSet));
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException|ClassNotFoundException|IOException e) {
+            throw new DAOException(e);
         }
         return courses;
     }
@@ -49,12 +46,8 @@ public class CourseDAOImpl implements CourseDAO {
                 courses.add(utils.createCourse(resultSet));
             }
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException|ClassNotFoundException|IOException e) {
+            throw new DAOException(e);
         }
         return courses;
     }

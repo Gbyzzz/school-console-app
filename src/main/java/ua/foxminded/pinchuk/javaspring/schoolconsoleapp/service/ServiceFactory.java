@@ -11,6 +11,9 @@ public class ServiceFactory {
     private static final ServiceFactory SERVICE = new ServiceFactory();
     private static final DAOInit INIT = new DAOInitImpl();
 
+    private ServiceFactory() {
+    }
+
     public static void initDB() throws DAOException {
         INIT.initDatabase();
     }
@@ -19,19 +22,19 @@ public class ServiceFactory {
         return SERVICE;
     }
 
-    private CourseService courseService = new CourseServiceImpl();
-    private GroupService groupService = new GroupServiceImpl();
-    private StudentService studentService = new StudentServiceImpl();
+    private static CourseService courseService = new CourseServiceImpl();
+    private static GroupService groupService = new GroupServiceImpl();
+    private static StudentService studentService = new StudentServiceImpl();
 
-    public CourseService getCourseService() {
+    public static CourseService getCourseService() {
         return courseService;
     }
 
-    public GroupService getGroupService() {
+    public static GroupService getGroupService() {
         return groupService;
     }
 
-    public StudentService getStudentService() {
+    public static StudentService getStudentService() {
         return studentService;
     }
 }

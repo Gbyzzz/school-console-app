@@ -19,25 +19,6 @@ public class DBConnection {
     private static String DATABASE_PASSWORD;
     private static String DATABASE_USER;
     private static String DATABASE_DRIVER;
-//
-//    static {
-//        try (InputStream inputStream = DBConnection.class.getClassLoader()
-//                .getResourceAsStream(DATABASE_PROPERTIES)) {
-//            properties.load(inputStream);
-//            DATABASE_URL = properties.getProperty(PROPERTY_URL);
-//            DATABASE_PASSWORD = properties.getProperty(PROPERTY_PASSWORD);
-//            DATABASE_USER = properties.getProperty(PROPERTY_USER);
-//            DATABASE_DRIVER = properties.getProperty(PROPERTY_DRIVER);
-//            Class.forName(DATABASE_DRIVER);
-//        } catch (FileNotFoundException e) {
-//            throw new RuntimeException();
-//        } catch (IOException ex) {
-//            throw new RuntimeException();
-//        } catch (ClassNotFoundException e) {
-//            throw new RuntimeException();
-//        }
-//    }
-
 
     public static void setDatabase(String databaseUrl) {
         if (DATABASE_DRIVER.equals("org.postgresql.Driver")) {

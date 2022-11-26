@@ -19,10 +19,10 @@ public class Menu {
 
     private IOData io = IODataFactory.getIoData();
     private CommandProvider commandProvider = new CommandProvider();
-    private Command command;
 
     public void start() throws DAOException, ServiceException {
         int select;
+        Command command;
         io.outputLine("Hello! You've just started my program, please select the task which you want to launch:");
         while (true) {
             io.outputLine("1. Find all groups with less or equal students’ number");

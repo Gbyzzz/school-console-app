@@ -1,11 +1,8 @@
 package ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.impl;
 
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.beans.Group;
-import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.ColumnName;
-import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.DAOUtils;
-import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.DBConnection;
-import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.GroupDAO;
-import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.utils.DAOUtilsImpl;
+import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.*;
+import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.exception.DAOException;
 
 
 import java.io.IOException;
@@ -13,7 +10,7 @@ import java.sql.*;
 import java.util.*;
 
 public class GroupDAOImpl implements GroupDAO {
-    private DAOUtils utils = new DAOUtilsImpl();
+    private DAOUtils utils = DAOFactory.getInstance().getDaoUtils();
 
     private static final String SQL_GET_ALL_GROUPS = "SELECT * FROM groups";
     private static final String SQL_GET_GROUP_BY_ID = "SELECT group_id, group_name FROM groups WHERE group_id=?";
@@ -30,19 +27,15 @@ public class GroupDAOImpl implements GroupDAO {
                 groups.add(utils.createGroup(resultSet));
             }
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException|ClassNotFoundException|IOException e) {
+            throw new DAOException(e);
         }
         return groups;
     }
 
     @Override
     public Optional<Group> getGroupById(int id) {
-        Optional<Group> group = null;
+        Optional<Group> group = Optional.empty();
         try (Connection connection = DBConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQL_GET_GROUP_BY_ID)) {
             statement.setInt(1, id);
@@ -51,12 +44,8 @@ public class GroupDAOImpl implements GroupDAO {
                 group = Optional.of(utils.createGroup(resultSet));
             }
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException|ClassNotFoundException|IOException e) {
+            throw new DAOException(e);
         }
         return group;
     }
@@ -72,12 +61,8 @@ public class GroupDAOImpl implements GroupDAO {
                 groups.put(utils.createGroup(resultSet), resultSet.getInt(ColumnName.TOTAL_STUDENTS.toString()));
             }
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException|ClassNotFoundException|IOException e) {
+            throw new DAOException(e);
         }
         return groups;
     }

@@ -10,7 +10,7 @@ import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.view.IOData;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.view.IODataFactory;
 
 public class AddStudent implements Command {
-    private IOData io = IODataFactory.getIoData();
+    private IOData io = IODataFactory.getInstance().getIoData();
     private GroupService groupService = ServiceFactory.getService().getGroupService();
     private StudentService studentService = ServiceFactory.getService().getStudentService();
 

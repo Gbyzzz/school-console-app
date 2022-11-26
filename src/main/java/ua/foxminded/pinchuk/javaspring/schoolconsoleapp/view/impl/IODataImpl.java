@@ -25,8 +25,8 @@ public class IODataImpl implements IOData {
 
     @Override
     public void outputMap(Map<Group, Integer> map) {
-        for (Group group : map.keySet()) {
-            outputLine(group.toString() + " - " + map.get(group) + " students");
+        for (Map.Entry<Group, Integer> entry : map.entrySet()) {
+            outputLine(entry.getKey().toString() + " - " + entry.getValue().toString() + " students");
         }
     }
 
