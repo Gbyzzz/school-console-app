@@ -74,7 +74,7 @@
                             </descriptorRefs>
                             <archive>
                                 <manifest>
-                                    <mainClass>ua.foxminded.pinchuk.javaspring.schoolconsoleapp.controller.Main</mainClass>
+                                    <mainClass>ua.foxminded.pinchuk.javaspring.schoolconsoleapp.task1.controller.Main</mainClass>
                                 </manifest>
                             </archive>
                         </configuration>
