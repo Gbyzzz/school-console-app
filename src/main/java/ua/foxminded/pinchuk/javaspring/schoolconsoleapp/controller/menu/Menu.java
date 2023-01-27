@@ -17,7 +17,7 @@ public class Menu {
         }
     }
 
-    private IOData io = IODataFactory.getIoData();
+    private IOData io = IODataFactory.getIOData();
     private CommandProvider commandProvider = new CommandProvider();
 
     public void start() throws DAOException, ServiceException {

@@ -1,7 +1,6 @@
 package ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.impl;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.beans.Group;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.DAOFactory;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.GroupDAO;
@@ -15,17 +14,16 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GroupDAOImplTest {
-
-    private GroupDAO groupDAO = DAOFactory.getGroupDao();
-
     @BeforeAll
     public static void init() {
         try {
-            ServiceFactory.initDB();
+            ServiceFactory.initDBContent();
         } catch (DAOException e) {
             throw new RuntimeException(e);
         }
     }
+
+    private GroupDAO groupDAO = DAOFactory.getGroupDao();
 
     @Test
     void getAllGroups() {

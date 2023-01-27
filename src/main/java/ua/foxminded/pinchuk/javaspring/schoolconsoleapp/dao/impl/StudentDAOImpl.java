@@ -52,18 +52,15 @@ public class StudentDAOImpl implements StudentDAO {
 
     @Override
     public boolean addStudent(Student student) {
-        boolean added;
-
         try (Connection connection = DBConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQL_ADD_STUDENT + " RETURNING student_id")) {
+             PreparedStatement statement = connection.prepareStatement(SQL_ADD_STUDENT)) {
             statement.setString(1, student.getFirstName());
             statement.setString(2, student.getLastName());
             statement.setLong(3, student.getGroup().getId());
-            added = statement.execute();
+            return statement.execute();
         } catch (SQLException | ClassNotFoundException | IOException e) {
             throw new DAOException(e);
         }
-        return added;
     }
 
     @Override

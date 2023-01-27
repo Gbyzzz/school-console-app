@@ -13,7 +13,7 @@ import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.view.IODataFactory;
 import java.util.List;
 
 public class AddStudentToCourse implements Command {
-    private IOData io = IODataFactory.getIoData();
+    private IOData io = IODataFactory.getIOData();
     private StudentService studentService = ServiceFactory.getStudentService();
     private CourseService courseService = ServiceFactory.getCourseService();
 
@@ -30,7 +30,7 @@ public class AddStudentToCourse implements Command {
             io.outputList(courseService.findCourseByStudentId(studentId));
             io.outputLine("List of available courses:");
             io.outputList(courses);
-            io.outputLine("");
+            io.newLine();
             io.outputLine("Input the index of the course");
             int courseId = io.getInt();
             studentService.addStudentToCourse(studentId, courseId);

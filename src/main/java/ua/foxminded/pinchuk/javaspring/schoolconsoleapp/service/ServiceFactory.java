@@ -19,6 +19,9 @@ public class ServiceFactory {
     public static void initDB() throws DAOException {
         INIT.initDatabase();
     }
+    public static void initDBContent() throws DAOException {
+        INIT.initDBContent();
+    }
 
     public static CourseService getCourseService() {
         return COURSE_SERVICE;

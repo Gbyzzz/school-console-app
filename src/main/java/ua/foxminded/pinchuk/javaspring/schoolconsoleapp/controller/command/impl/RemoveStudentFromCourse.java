@@ -13,7 +13,7 @@ import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.view.IODataFactory;
 import java.util.List;
 
 public class RemoveStudentFromCourse implements Command {
-    private IOData io = IODataFactory.getIoData();
+    private IOData io = IODataFactory.getIOData();
     private StudentService studentService = ServiceFactory.getStudentService();
     private CourseService courseService = ServiceFactory.getCourseService();
 
@@ -34,7 +34,7 @@ public class RemoveStudentFromCourse implements Command {
 
         } else {
             io.outputLine("No students or courses were found");
-            io.outputLine("");
+            io.newLine();
         }
 
     }

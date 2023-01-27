@@ -11,7 +11,7 @@ import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.view.IODataFactory;
 import java.util.List;
 
 public class DeleteStudent implements Command {
-    private IOData io = IODataFactory.getIoData();
+    private IOData io = IODataFactory.getIOData();
     private StudentService studentService = ServiceFactory.getStudentService();
 
     public void execute() throws DAOException {

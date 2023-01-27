@@ -1,7 +1,6 @@
 package ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.impl;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.beans.Course;
@@ -14,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 class CourseDAOImplTest {
 
     private CourseDAO courseDAO = DAOFactory.getCourseDao();
@@ -22,7 +20,7 @@ class CourseDAOImplTest {
     @BeforeAll
     public static void init() {
         try {
-            ServiceFactory.initDB();
+            ServiceFactory.initDBContent();
         } catch (DAOException e) {
             throw new RuntimeException(e);
         }

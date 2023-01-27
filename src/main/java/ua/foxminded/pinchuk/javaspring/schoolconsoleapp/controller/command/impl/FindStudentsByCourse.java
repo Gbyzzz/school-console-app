@@ -11,7 +11,7 @@ import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.view.IODataFactory;
 import java.util.List;
 
 public class FindStudentsByCourse implements Command {
-    private IOData io = IODataFactory.getIoData();
+    private IOData io = IODataFactory.getIOData();
     private StudentService studentService = ServiceFactory.getStudentService();
     private CourseService courseService = ServiceFactory.getCourseService();
 
@@ -23,7 +23,7 @@ public class FindStudentsByCourse implements Command {
             io.outputLine("Input the index of the course");
             int courseId = io.getInt();
             io.outputList(studentService.findStudentsByCourse(courseId));
-            io.outputLine("");
+            io.newLine();
         } else {
             io.outputLine("No courses were found");
         }

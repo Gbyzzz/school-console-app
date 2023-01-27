@@ -16,17 +16,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class StudentDAOImplTest {
-
-    private StudentDAO studentDAO = DAOFactory.getStudentDao();
-
     @BeforeAll
     public static void init() {
         try {
-            ServiceFactory.initDB();
+            ServiceFactory.initDBContent();
         } catch (DAOException e) {
             throw new RuntimeException(e);
         }
     }
+
+    private StudentDAO studentDAO = DAOFactory.getStudentDao();
+
+
 
     @ParameterizedTest
     @Order(1)

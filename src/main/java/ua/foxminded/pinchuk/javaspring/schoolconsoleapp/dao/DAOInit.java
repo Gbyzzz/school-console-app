@@ -4,4 +4,5 @@ import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.dao.exception.DAOExcepti
 
 public interface DAOInit {
     void initDatabase() throws DAOException;
+    void initDBContent();
 }

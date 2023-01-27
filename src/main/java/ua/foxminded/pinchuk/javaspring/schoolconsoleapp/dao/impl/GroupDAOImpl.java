@@ -30,7 +30,7 @@ public class GroupDAOImpl implements GroupDAO {
             "       g.group_name, " +
             "COUNT(s.group_id) AS total_students " +
             "FROM groups g " +
-            "LEFT OUTER JOIN students s ON s.group_id=g.group_id " +
+            "LEFT JOIN students s ON s.group_id=g.group_id " +
             "GROUP BY g.group_id " +
             "HAVING COUNT(s.group_id)<=? " +
             "ORDER BY total_students ASC";

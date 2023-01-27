@@ -1,5 +1,6 @@
 package ua.foxminded.pinchuk.javaspring.schoolconsoleapp.view.impl;
 
+import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.beans.Group;
 import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.view.IOData;
 
 import java.util.List;
@@ -16,6 +17,11 @@ public class IODataImpl implements IOData {
     }
 
     @Override
+    public void newLine(){
+        System.out.println(System.getProperty("line.separator"));
+    }
+
+    @Override
     public void outputList(List list) {
         for (Object obj : list) {
             outputLine(obj.toString());
@@ -23,8 +29,8 @@ public class IODataImpl implements IOData {
     }
 
     @Override
-    public void outputMap(Map<?, ?> map) {
-        for (Map.Entry<?, ?> entry : map.entrySet()) {
+    public void outputMapOfGroups(Map<Group, Integer> map) {
+        for (Map.Entry<Group, Integer> entry : map.entrySet()) {
             outputLine(entry.getKey().toString() + " - " + entry.getValue().toString() + " students");
         }
     }

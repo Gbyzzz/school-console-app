@@ -8,7 +8,7 @@ public class IODataFactory {
     private IODataFactory() {
     }
 
-    public static IOData getIoData() {
+    public static final IOData getIOData() {
         return IO_DATA;
     }
 }

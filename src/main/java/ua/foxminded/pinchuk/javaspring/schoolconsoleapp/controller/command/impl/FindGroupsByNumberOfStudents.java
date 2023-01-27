@@ -10,7 +10,7 @@ import ua.foxminded.pinchuk.javaspring.schoolconsoleapp.view.IODataFactory;
 import java.util.Map;
 
 public class FindGroupsByNumberOfStudents implements Command {
-    private IOData io = IODataFactory.getIoData();
+    private IOData io = IODataFactory.getIOData();
     private GroupService groupService = ServiceFactory.getGroupService();
 
     public void execute() {
@@ -19,7 +19,7 @@ public class FindGroupsByNumberOfStudents implements Command {
         int students = io.getInt();
         Map<Group, Integer> map = groupService.findGroupsByNumberOfStudents(students);
         if (!map.isEmpty()) {
-            io.outputMap(map);
+            io.outputMapOfGroups(map);
         } else {
             io.outputLine("No group with such number of students were found");
         }
